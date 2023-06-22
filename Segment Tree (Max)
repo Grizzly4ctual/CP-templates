@@ -1,0 +1,71 @@
+/*
+
+query works in 0-based with [l,r) i.e 0<=l<n && 1<=r<=n
+
+segtree st;
+st.init(n);
+st.build(a);
+*/
+
+struct segtree {
+    int size;
+    vector<int>vals;
+    void init(int n) {
+        size=1;
+        while (size<n) {
+            size*=2;
+        }
+        vals.assign(2*size,0LL);
+    }
+ 
+    void build(vector<int>&a,int x,int lx,int rx) {
+        if (rx-lx==1) {
+            if (lx<a.size()) {
+                vals[x]=a[lx];
+            }
+            return;
+        }
+        int mid=(lx+rx)/2;
+        build(a,2*x+1,lx,mid);
+        build(a,2*x+2,mid,rx);
+        vals[x]=max(vals[2*x+1],vals[2*x+2]);
+    }
+ 
+    void build(vector<int>&a) {
+        build(a,0,0,size);
+    }
+ 
+    void set(int i,int v,int x,int lx,int rx) {
+        if (rx-lx==1) {
+            vals[x]=v;
+            return;
+        }
+        int mid=(lx+rx)/2;
+        if (i<mid) {
+            set(i,v,2*x+1,lx,mid);
+        } else {
+            set(i,v,2*x+2,mid,rx);
+        }
+        vals[x]=max(vals[2*x+1],vals[2*x+2]);
+    }
+ 
+    void set(int i,int v) {
+        set(i,v,0,0,size);
+    }
+ 
+    int query(int l,int r,int x,int lx,int rx) {
+        if (lx>=l && rx<=r) {
+            return vals[x];
+        }
+        if (lx>=r || rx<=l) {
+            return 0;
+        }
+        int mid=(lx+rx)/2;
+        return max(query(l,r,2*x+1,lx,mid),query(l,r,2*x+2,mid,rx));
+    }
+ 
+    int query(int l,int r) {
+        return query(l,r,0,0,size);
+    }
+ 
+};
