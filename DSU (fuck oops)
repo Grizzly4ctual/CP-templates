@@ -1,3 +1,5 @@
+Path Compression + Union by Rank
+
 struct dsu {
     int par[MAXN];
     int size[MAXN];
