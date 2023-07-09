@@ -1,4 +1,4 @@
-Path Compression + Union by Rank
+Path Compression + Union by Size
 
 struct dsu {
     vector<int>par;
