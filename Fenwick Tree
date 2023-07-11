@@ -9,7 +9,7 @@ struct ftree {
             i+=(i&(-i));
         }
     }
-    int query(int i) {
+    int query(int i) {            //till prefix i
         int sum=0;
         while(i>0) {
             sum+=ftree[i];
