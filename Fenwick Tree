@@ -1,0 +1,20 @@
+struct ftree {
+    vector<int>ftree;
+    void init(int n) {
+        ftree.resize(n,0);
+    }
+    void update(int i,int v) {
+        while(i<n) {
+            ftree[i]+=v;
+            i+=(i&(-i));
+        }
+    }
+    int query(int i) {
+        int sum=0;
+        while(i>0) {
+            sum+=ftree[i];
+            i-=(i&(-i));
+        }
+        return sum;
+    }
+};
