@@ -1,0 +1,31 @@
+int binpowMod(int a, int b){
+    a %= MOD;
+    int ans = 1;
+    while(b > 0){
+        if(b % 2){
+            ans = (ans * a) % MOD;
+        }
+        a = (a * a) % MOD;
+        b /= 2;
+    }
+    return ans;
+}
+
+int modInverse(int n)
+{
+    return binpowMod(n, MOD - 2); // MOD is prime here, fermat's little theorem
+}
+
+int fac[200005];
+
+int nCr(int n, int r){
+    if (n < r)
+        return 0;
+
+    if (r == 0 || r == n)
+        return 1;
+
+    return (fac[n] * modInverse(fac[r]) % MOD * modInverse(fac[n - r]) % MOD) % MOD; // fac is array of factorials with MOD taken
+}
+
+//remember to actually precompute factorials in main
