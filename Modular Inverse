@@ -1,0 +1,18 @@
+//Mod Inverse
+int binpowMod(int a, int b) {
+    a %= MOD;
+    int ans = 1;
+    while(b > 0){
+        if(b % 2){
+            ans = (ans * a) % MOD;
+        }
+        a = (a * a) % MOD;
+        b /= 2;
+    }
+    return ans;
+}
+
+int modInverse(int n)
+{
+    return binpowMod(n, MOD - 2); // MOD is prime here, fermat's little theorem
+}
