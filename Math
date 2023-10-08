@@ -45,7 +45,7 @@ namespace number_theory {
         }
     }
     vector<int>phi;
-    void phi(int n) {
+    void totient(int n) {
         phi.resize(n+1);
         for (int i=1;i<n+1;i++) {
             phi[i]=i;
