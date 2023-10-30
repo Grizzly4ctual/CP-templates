@@ -1,7 +1,8 @@
 namespace number_theory {
     int MOD=1e9+7;        //change mod if required!
     int fac[200005];
-
+    int spf[200005];
+    int mobius[200005];
     void facs() {
         fac[0]=1;
         for (int i=2;i<200005;i++) {
@@ -83,5 +84,31 @@ namespace number_theory {
             return 1;
         return (fac[n] * modInverse(fac[r]) % MOD * modInverse(fac[n - r]) % MOD) % MOD;
     }
+
+    void spff() {
+        for (int i=2;i<200005;i++) {
+            if (spf[i]==0) {
+                for (int j=i;j<200005;j+=i) {
+                    if (spf[j]==0) {
+                        spf[j]=i;
+                    }
+                }
+            }
+        }
+    }
+
+    void mobius() {
+        for (int i=1;i<200005;i++) {
+            if (i==1) {
+                mob[i]=1;
+            } else {
+                if (spf[i/spf[i]]==spf[i]) {
+                    mob[i]=0;
+                } else {
+                    mob[i]=-1*mob[i/spf[i]];
+                }
+            }
+        }
+    }
+
 }
-using namespace number_theory;
