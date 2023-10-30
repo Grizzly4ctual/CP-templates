@@ -97,18 +97,20 @@ namespace number_theory {
         }
     }
 
-    void mobius() {
+    void mob() {
         for (int i=1;i<200005;i++) {
             if (i==1) {
-                mob[i]=1;
+                mobius[i]=1;
             } else {
                 if (spf[i/spf[i]]==spf[i]) {
-                    mob[i]=0;
+                    mobius[i]=0;
                 } else {
-                    mob[i]=-1*mob[i/spf[i]];
+                    mobius[i]=-1*mobius[i/spf[i]];
                 }
             }
         }
     }
 
 }
+
+using namespace number_theory;
